@@ -1,9 +1,10 @@
 const express = require('express')
-const { port, connection_string } = require('./config')
+const { port, connection_string, prefix } = require('./config')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const productRouter = require('./routers/products')
 const categoryRouter = require('./routers/categories')
+const userRouter = require('./routers/users')
 
 const app = express()
 
@@ -15,8 +16,9 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
-app.use(productRouter)
-app.use(categoryRouter)
+app.use(`${prefix}/products`, productRouter)
+app.use(`${prefix}/categories`, categoryRouter)
+app.use(`${prefix}/users`, userRouter)
 
 
 mongoose.connect(connection_string)
