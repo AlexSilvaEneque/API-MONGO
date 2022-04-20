@@ -10,7 +10,7 @@ router.get('/', userController.readAll)
 
 router.get('/:id', userController.readById)
 
-router.post('/', userController.saveUser)
+router.post('/register', userController.saveUser)
 
 router.post('/login', authController.login)
 

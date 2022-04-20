@@ -5,6 +5,7 @@ const cors = require('cors')
 const productRouter = require('./routers/products')
 const categoryRouter = require('./routers/categories')
 const userRouter = require('./routers/users')
+const verifyToken = require('./middleware/verify-token')
 
 const app = express()
 
@@ -15,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(express.json())
+app.use(verifyToken)
 
 app.use(`${prefix}/products`, productRouter)
 app.use(`${prefix}/categories`, categoryRouter)
