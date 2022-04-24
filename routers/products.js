@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const ProductController = require('../controllers/products.controller')
+const verifyRole = require('../middleware/verify-role')
 
 const productController = new ProductController
 

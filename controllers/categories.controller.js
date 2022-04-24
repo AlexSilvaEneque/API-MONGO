@@ -5,47 +5,49 @@ class CategoryController {
         try {
             const categoryList = await Category.find()
             if (!categoryList) {
-                return res.status(500).json({success: false})
+                throw new Error('Empty collection!')
             }
-            return res.status(200).send(categoryList)
+            return res.status(200).json({ categoryList, success: true })
         } catch (error) {
-            console.log(error)
+            return res.status(500).json({ message: error.message, success: false })
         }
     }
 
-    async readById(req, res) {
-        const idCategory = req.params.id
+    async readById(req, res) {        
         try {
+            const idCategory = req.params.id
             let category = await Category.findById(idCategory)
-            if (!category)
-                return res.status(500).json({message: 'Category not found',success: false})
-        
-            return res.status(200).send(category)
+            if (!category) {
+                throw new Error('Category not found!')
+            }
+            return res.status(200).json({ category, success: true })
         } catch (error) {
-            console.log(error)
+            return res.status(500).json({ message: error.message, success: false })
         }
     }
 
     async saveCategory(req, res) {
-        let category = new Category({
-            name: req.body.name,
-            color: req.body.color,
-            icon: req.body.icon
-        })
-    
         try {
+            let category = new Category({
+                name: req.body.name,
+                color: req.body.color,
+                icon: req.body.icon
+            })
+
             category = await category.save()
-            if (!category)
-                return res.status(500).json({message: 'The category cannot be created!'})
-            return res.status(200).send(category)
+
+            if (!category) {
+                throw new Error('The category cannot be created!')
+            }
+            return res.status(200).json({ category, success: true })
         } catch (error) {
-            return res.status(400).json(error)
+            return res.status(400).json({ message: error.message, success: false })
         }
     }
 
-    async updateCategory(req, res) {
-        const idCategory = req.params.id
+    async updateCategory(req, res) {        
         try {
+            const idCategory = req.params.id
             let category = await Category.findByIdAndUpdate(idCategory,
                 {
                     name: req.body.name,
@@ -54,33 +56,28 @@ class CategoryController {
                 },
                 { new: true }
             )
-            if (!category)
-                return res.status(400).json({message: 'Failed top update!'})
-            return res.status(201).send({category, succes: true})
+            if (!category) {
+                throw new Error('Failed top update!')
+            }
+            return res.status(201).send({ category, succes: true })
         } catch (error) {
-            console.log(error)
+            return res.status(400).json({ message: error.message, success: false })
         }
     }
 
-    async deleteCategory(req, res) {
-        let id = req.params.id
+    async deleteCategory(req, res) {        
         try {
+            const id = req.params.id
             let categoryDeleted = await Category.findByIdAndDelete(id)
         
             if (!categoryDeleted) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Category not found'
-                })
+                throw new Error('Category not found!')
             }
             else {
-                return res.status(200).json({
-                    success: true,
-                    message: 'Category deleted!'
-                })
+                return res.status(200).json({ message: 'Category deleted!', success: true })
             }
         } catch (error) {
-            console.log(error)
+            return res.status(400).json({ message: error.message, success: false })
         }
     }
 }

@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const UserController = require('../controllers/users.controller')
 const AuthController = require('../controllers/auth.controller')
+const verifyRole = require('../middleware/verify-role')
 
 const userController = new UserController
 const authController = new AuthController
 
-router.get('/', userController.readAll)
+router.get('/', verifyRole, userController.readAll)
 
-router.get('/:id', userController.readById)
+router.get('/:id', verifyRole, userController.readById)
 
 router.post('/register', userController.saveUser)
 

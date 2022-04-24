@@ -1,17 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const CategoryController = require('../controllers/categories.controller')
+const verifyRole = require('../middleware/verify-role')
 
 const categoryController = new CategoryController
 
-router.get('/', categoryController.readAll)
+router.get('/', verifyRole, categoryController.readAll)
 
-router.get('/:id', categoryController.readById)
+router.get('/:id', verifyRole, categoryController.readById)
 
-router.post('/', categoryController.saveCategory)
+router.post('/', verifyRole, categoryController.saveCategory)
 
-router.put('/:id', categoryController.updateCategory)
+router.put('/:id', verifyRole, categoryController.updateCategory)
 
-router.delete('/:id', categoryController.deleteCategory)
+router.delete('/:id', verifyRole, categoryController.deleteCategory)
 
 module.exports = router
