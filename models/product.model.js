@@ -15,8 +15,8 @@ const productSchema = new Schema({
         default: ''
     },
     image: {
-        type: String,
-        default: ''
+        public_id: String,
+        secure_url: String
     },
     images: [{
         type: String

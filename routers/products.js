@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const ProductController = require('../controllers/products.controller')
+const { upload } = require('../middleware/expres-fileupload')
 const verifyRole = require('../middleware/verify-role')
 
 const productController = new ProductController
@@ -9,9 +10,11 @@ router.get('/', productController.readAll)
 
 router.get('/:id', productController.readById)
 
-router.post('/', productController.saveProduct)
+router.post('/', upload, productController.saveProduct)
 
-router.put('/:id', productController.updateProduct)
+
+// TODO: add upload
+router.put('/:id', upload, productController.updateProduct)
 
 router.delete('/:id', productController.deleteProduct)
 

@@ -5,6 +5,7 @@ const cors = require('cors')
 const productRouter = require('./routers/products')
 const categoryRouter = require('./routers/categories')
 const userRouter = require('./routers/users')
+const orderRouter = require('./routers/orders')
 const verifyToken = require('./middleware/verify-token')
 
 const app = express()
@@ -21,6 +22,7 @@ app.use(verifyToken)
 app.use(`${prefix}/products`, productRouter)
 app.use(`${prefix}/categories`, categoryRouter)
 app.use(`${prefix}/users`, userRouter)
+app.use(`${prefix}/orders`, orderRouter)
 
 
 mongoose.connect(connection_string)
