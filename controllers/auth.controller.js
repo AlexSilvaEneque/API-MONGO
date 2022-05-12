@@ -6,7 +6,7 @@ class AuthController {
     async login(req, res) {
         try {
             const user = await User.findOne({email: req.body.email})
-        // as
+            
         if (!user) {
             throw new Error('User not found with email sended!')
         }

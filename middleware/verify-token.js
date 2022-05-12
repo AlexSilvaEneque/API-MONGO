@@ -2,10 +2,6 @@ const { prefix } = require('../config')
 const { verifyTokens } = require('../helpers/token.helper')
 
 const verifyToken = (req, res, next) => {
-    // if (req.url === `${prefix}/users/login` || req.url === `${prefix}/users/register` || (req.url.includes(`${prefix}/products`) && req.method === 'GET') || (req.url.includes(`${prefix}/categories`) && req.method === 'GET')) {
-    //     return next()
-    // }
-
     try {
         if (!req.headers.authorization) {
             throw new Error(['Access denied!',403])

@@ -17,7 +17,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(express.json())
-// app.use(verifyToken)
 
 app.use(`${prefix}/products`, productRouter)
 app.use(`${prefix}/categories`, categoryRouter)
