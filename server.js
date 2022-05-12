@@ -6,7 +6,6 @@ const productRouter = require('./routers/products')
 const categoryRouter = require('./routers/categories')
 const userRouter = require('./routers/users')
 const orderRouter = require('./routers/orders')
-const verifyToken = require('./middleware/verify-token')
 
 const app = express()
 

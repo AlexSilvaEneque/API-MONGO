@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const ProductController = require('../controllers/products.controller')
 const { upload } = require('../middleware/expres-fileupload')
-const verifyRole = require('../middleware/verify-role')
+// const verifyRole = require('../middleware/verify-role')
 
 const productController = new ProductController
 

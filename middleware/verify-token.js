@@ -1,4 +1,3 @@
-const { prefix } = require('../config')
 const { verifyTokens } = require('../helpers/token.helper')
 
 const verifyToken = (req, res, next) => {
