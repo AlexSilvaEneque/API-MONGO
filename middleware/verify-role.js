@@ -3,6 +3,10 @@ const User = require('../models/user.model')
 
 const verifyRole = async (req, res, next) => {
     try {
+        if (!req.headers.authorization) {
+            throw new Error('Not token!')
+        }
+
         const token = req.headers.authorization.split(' ').pop()
 
         if (!token) {
