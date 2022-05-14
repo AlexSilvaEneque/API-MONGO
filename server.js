@@ -10,7 +10,7 @@ const orderRouter = require('./routers/orders')
 const app = express()
 
 const corsOptions = {
-    origin: 'http://localhost:4000',
+    origin: '*',
     optionsSuccessStatus: 200
 }
 
