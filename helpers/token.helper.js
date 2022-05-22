@@ -22,4 +22,12 @@ const verifyTokens = (token) => {
     }
 }
 
-module.exports = { tokenSign, verifyTokens }
+const decodeTokens = (token) => {
+    try {
+        return jwt.decode(token)
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = { tokenSign, verifyTokens, decodeTokens }

@@ -1,6 +1,7 @@
 const { verifyTokens } = require('../helpers/token.helper')
+const User = require('../models/user.model')
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
     try {
         if (!req.headers.authorization) {
             throw new Error(['Access denied!',403])
@@ -10,7 +11,10 @@ const verifyToken = (req, res, next) => {
 
         const tokenData = verifyTokens(token)
 
-        if (tokenData.userId) {
+        const userFind = await User.findById(tokenData.userId)
+
+        if (tokenData.userId && tokenData.exp === userFind.expirationDate) {
+            req.currentUser = tokenData.userId
             next()
         } else {
             throw new Error(['Invalid token!',400])

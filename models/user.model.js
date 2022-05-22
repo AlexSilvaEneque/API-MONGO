@@ -38,6 +38,11 @@ const userSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    expirationDate: {
+        type: Number,
+        required: true,
+        default: new Date().getTime() / 1000
     }
 })
 
