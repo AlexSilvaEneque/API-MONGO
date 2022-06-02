@@ -22,6 +22,7 @@ const verifyTokens = (token) => {
     }
 }
 
+//TODO: hace lo mismo que el de arriba
 const decodeTokens = (token) => {
     try {
         return jwt.decode(token)

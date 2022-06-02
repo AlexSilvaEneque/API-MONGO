@@ -19,10 +19,6 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
-    apartment: {
-        type: String,
-        default: ''
-    },
     city: {
         type: String,
         default: ''
@@ -43,7 +39,14 @@ const userSchema = new Schema({
         type: Number,
         required: true,
         default: new Date().getTime() / 1000
-    }
+    },
+    emailToken: {
+        type: String
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const User = mongoose.model('User', userSchema)

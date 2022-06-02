@@ -1,5 +1,8 @@
 const User = require("../models/user.model")
-const bcryptjs = require('bcryptjs')
+const { hashPassword } = require("../helpers/password-handler")
+const { rToken } = require("../helpers/random-token")
+const { verify_email } = require("../helpers/handler-send-email")
+const { host } = require("../config")
 
 class UserController {
     async readAll(req, res) {
@@ -33,16 +36,25 @@ class UserController {
             let user = new User({
                 name: req.body.name,
                 email: req.body.email,
-                passwordHash: bcryptjs.hashSync(req.body.password, 10),
+                passwordHash: hashPassword(req.body.password),
                 street: req.body.street,
                 apartment: req.body.apartment,
                 city: req.body.city,
                 country: req.body.country,
                 phone: req.body.phone,
-                isAdmin: req.body.isAdmin
+                isAdmin: req.body.isAdmin,
+                emailToken: rToken()
             })
+            //TODO: generate a random token and saved in the field emailToken
         
             user = await user.save()
+
+            //TODO: send email
+            //FIXME: in development uses environment variable for host
+            const link = `${host}/api/v1/users/verify-email/${user.emailToken}`
+
+            verify_email(user.email, link)
+
             if (!user) {
                 throw new Error('The user cannot be created!')
             }

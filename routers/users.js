@@ -18,4 +18,10 @@ router.post('/login', authController.login)
 
 router.get('/close/logout', verifyToken, authController.logout)
 
+router.post('/forgot-password', authController.forgotPassword)
+
+router.put('/new-password', authController.newPassword)
+
+router.get('/verify-email/:token', authController.verifyEmail)
+
 module.exports = router

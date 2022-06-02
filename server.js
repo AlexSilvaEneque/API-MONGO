@@ -16,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 
 app.use(`${prefix}/products`, productRouter)
 app.use(`${prefix}/categories`, categoryRouter)
