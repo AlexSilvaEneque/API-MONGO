@@ -45,13 +45,12 @@ class UserController {
                 isAdmin: req.body.isAdmin,
                 emailToken: rToken()
             })
-            //TODO: generate a random token and saved in the field emailToken
         
             user = await user.save()
 
             //TODO: send email
             //FIXME: in development uses environment variable for host
-            const link = `${host}/api/v1/users/verify-email/${user.emailToken}`
+            // const link = `${host}/api/v1/users/verify-email/${user.emailToken}`
 
             verify_email(user.email, link)
 

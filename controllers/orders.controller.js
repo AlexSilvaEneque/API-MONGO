@@ -4,10 +4,6 @@ const OrderItem = require("../models/orderItems")
 class OrderController {
     async readAll(req, res) {
         try {
-
-            // TODO: estamos ordenando por fecha del más reciente al más antiguo
-            //const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1})
-
             const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1})
 
             if (!orderList) {
